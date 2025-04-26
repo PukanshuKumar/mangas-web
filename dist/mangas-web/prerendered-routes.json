@@ -1,0 +1,12 @@
+{
+  "routes": [
+    "/",
+    "/bookmark",
+    "/latest-manga",
+    "/list-view",
+    "/login",
+    "/new-manga",
+    "/register",
+    "/top-manga"
+  ]
+}
