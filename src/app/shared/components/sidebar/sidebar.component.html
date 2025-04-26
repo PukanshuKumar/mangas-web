@@ -1,0 +1,101 @@
+<ng-container *ngIf="topAllTimeManga.length > 0;">
+    <section class="most_popular_section">
+    <div class="section_heading">
+      <div class="heading">
+        <h1>MOST POPULAR MANGA</h1>
+      </div>
+    </div>
+    <div class="section_content">
+      <ul class="most_popular_list" id="most_popular_list">
+          <ng-container *ngFor="let manga of topAllTimeManga">
+            <li class="list_item">
+              <a [routerLink]="['/manga', manga.id]">
+                <span class="list_item_title">{{ manga.title }}</span> -
+                <span class="list_item_title">Chapter {{ manga.chapter }} <span *ngIf="manga.chapterTitle">: {{ manga.chapterTitle }}</span></span>
+              </a>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+    </section>
+  </ng-container>
+  <ng-container *ngIf="topAllTimeManga.length > 0;">
+    <section class="new_arrival_section">
+      <div class="section_heading">
+        <div class="heading">
+          <h1>New Manga</h1>
+        </div>
+      </div>
+      <div class="section_content">
+        <div class="new_arrival_list" id="new_arrival_list">
+          <ng-container *ngFor="let manga of newMangaWeeklyManga">
+            <div class="list_item">
+              <a [routerLink]="['/manga', manga.id]">
+                <img [src]="manga.cover" class="img-fluid" [alt]="manga.title" referrerpolicy="no-referrer">
+              </a>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div class="section_footer">
+        <button type="button" class="footer_link">
+          << MORE>>
+        </button>
+      </div>
+    </section>
+  </ng-container>
+  <ng-container *ngIf="mangaGenresList.length > 0;">
+    <section class="genres_section">
+      <div class="section_heading">
+        <div class="heading">
+          <h1>Manga by Genres</h1>
+        </div>
+      </div>
+      <div class="section_content">
+        <ul class="genres_list border-bottom">
+          <li class="list_item sort_latest" id="sort_latest">
+            <a [routerLink]="['/list-view']" [queryParams]="{category: 'latest' }" [routerLink]="['/list-view']">
+              Latest
+            </a>
+          </li>
+          <li class="list_item sort_newest" id="sort_newest">
+            <a [routerLink]="['/list-view']" [queryParams]="{category: 'newest' }" [routerLink]="['/list-view']">
+              Newest
+            </a>
+          </li>
+          <li class="list_item sort_top-view" id="sort_top-view">
+            <a [routerLink]="['/list-view']" [queryParams]="{category: 'top-view' }">
+              Top View
+            </a>
+          </li>
+        </ul>
+        <ul class="genres_list border-bottom">
+
+          <li class="list_item status_all" id="status_all">
+            <a [routerLink]="['/list-view']" [queryParams]="{status: 'all' }">
+              ALL
+            </a>
+          </li>
+          <li class="list_item status_completed" id="status_completed">
+            <a [routerLink]="['/list-view']" [queryParams]="{status: 'completed' }">
+              Completed
+            </a>
+          </li>
+          <li class="list_item status_ongoing" id="status_ongoing">
+            <a [routerLink]="['/list-view']" [queryParams]="{status: 'ongoing' }">
+              Ongoing
+            </a>
+          </li>
+        </ul>
+        <ul class="genres_list" id="genres_list_container">
+          <ng-container *ngFor="let genre of mangaGenresList">
+            <li class="list_item " [id]="genre.id">
+              <a [routerLink]="['/list-view']" [queryParams]="{genres: genre.id, genrenames: genre.name }">
+                {{ genre.name }}
+              </a>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+    </section>
+  </ng-container>

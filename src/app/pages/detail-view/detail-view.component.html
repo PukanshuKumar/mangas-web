@@ -1,0 +1,215 @@
+<div class="d-flex flex-column h-m-100">
+  <app-header></app-header>
+    <main class="flex-fill ">
+      <app-top-week></app-top-week>
+
+      <section class="main_section">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8">
+                <!-- <div *ngIf="mangaDetails">
+                  <h2>{{ mangaDetails.title }}</h2>
+                  <img [src]="mangaDetails.cover" alt="Cover" />
+
+                  <p><strong>Description:</strong> {{ mangaDetails.description }}</p>
+                  <p><strong>Author:</strong> {{ mangaDetails.author }}</p>
+                  <p><strong>Status:</strong> {{ mangaDetails.status }}</p>
+                  <p><strong>Rating:</strong> {{ mangaDetails.rating }} ({{ mangaDetails.totalLikes }} likes)</p>
+                  <p><strong>Genres:</strong> {{ mangaDetails.genres.join(', ') }}</p>
+                  <p><strong>Last Updated:</strong> {{ mangaDetails.lastUpdated }}</p>
+
+                  <h3>Chapters</h3>
+                  <ul>
+                    <li *ngFor="let chapter of mangaDetails.chapters">
+                      Chapter {{ chapter.chapterNumber }} - {{ chapter.title }} <br />
+                      <small>Uploaded: {{ chapter.uploadedTime }}</small>
+                    </li>
+                  </ul>
+                </div> -->
+
+                <div *ngIf="!mangaDetails">
+                  <p>Loading manga details...</p>
+                </div>
+                <ng-container *ngIf="mangaDetails">
+
+                <div class="detail_panel_wrapper">
+                  <div class="detail_panel_header">
+                    <div class="breadcrumb_wrapper">
+                      <div class="breadcrumb_item">
+                        <a href="javascript:void(0)">Read Manga Online</a>
+                      </div>
+                      <div class="breadcrumb_item">
+                        <a href="javascript:void(0)" id="mangaData">{{ mangaDetails.title }}</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="detail_panel_body">
+                    <div class="detail_panel_content">
+                      <div class="item_img_wrapper">
+                        <div class="item_img">
+                          <img [src]="mangaDetails.cover" id="manga-cover" class="img-fluid" referrerpolicy="no-referrer" alt="">
+                          <!-- <span class="badge hot_badge">HOT</span> -->
+                          <!-- <span class="badge new_badge">new</span> -->
+                          <span [class]="'badge '+ mangaDetails.popularityTag+'_badge'">{{ mangaDetails.popularityTag }}</span>
+                          <span class="rating">
+                            <span class="content" id="manga-rating">{{ mangaDetails.rating }}</span>
+                            <span class="icon"><i class="fas fa-star"></i></span>
+                          </span>
+                        </div>
+                        <a href="javscript:void(0)" class="btn_read">Read Chapter List</a>
+                      </div>
+                      <div class="item_content">
+                        <h2 class="item_title">
+                          <a href="javascript:void(0)" id="manga-title">{{ mangaDetails.title }}</a>
+                        </h2>
+                        <ul class="detail_list">
+                          <li class="detail_item">
+                            <div class="detail_item_label">
+                              <span class="label_icon"><i class="fas fa-filter"></i></span>
+                              <h6 class="label_text">Alternative:</h6>
+                            </div>
+                            <div class="detail_item_content">
+                              <h6 id="manga-alternative-titles">
+                                {{ mangaDetails.altTitles.join(', ') }}
+                                <!-- <ng-container *ngFor="let title of manga.altTitle">
+                                  <span>{{ title | json | slice:2:-2 }}</span>,
+                                </ng-container> -->
+                              </h6>
+                            </div>
+                          </li>
+                          <li class="detail_item">
+                            <div class="detail_item_label">
+                              <span class="label_icon"><i class="fas fa-user"></i></span>
+                              <h6 class="label_text">Author(s) :</h6>
+                            </div>
+                            <div class="detail_item_content" id="manga-author">
+                              <a href="javascript:void(0)">{{ mangaDetails.author }}</a>
+                            </div>
+                          </li>
+                          <li class="detail_item">
+                            <div class="detail_item_label">
+                              <span class="label_icon"><i class="fas fa-ellipsis-h"></i></span>
+                              <h6 class="label_text">Status :</h6>
+                            </div>
+                            <div class="detail_item_content">
+                              <h6 id="manga-status">{{ mangaDetails.status }}</h6>
+                            </div>
+                          </li>
+                          <li class="detail_item">
+                            <div class="detail_item_label">
+                              <span class="label_icon"><i class="fas fa-list"></i></span>
+                              <h6 class="label_text">Genres </h6>
+                            </div>
+                            <div class="detail_item_content" id="manga-genres">
+                              <h6>{{ mangaDetails.genres.join(', ') }}</h6>
+                               <!-- <ng-container *ngFor="let genre of mangaDetails.genres">
+                                 <a href="javascript:void(0)">{{ genre }}</a>-
+                                </ng-container> -->
+                            </div>
+                          </li>
+                          <li class="detail_item">
+                            <div class="detail_item_label">
+                              <span class="label_icon"><i class="fas fa-clock"></i></span>
+                              <h6 class="label_text">Updated:</h6>
+                            </div>
+                            <div class="detail_item_content">
+                              <h6 id="manga-last-update">{{ mangaDetails.lastUpdated }}</h6>
+                            </div>
+                          </li>
+                          <li class="detail_item">
+                            <div class="detail_item_label">
+                              <span class="label_icon"><i class="far fa-eye"></i></span>
+                              <h6 class="label_text">Views:</h6>
+                            </div>
+                            <div class="detail_item_content">
+                              <h6 id="manga-views">{{ mangaDetails.views }}</h6>
+                            </div>
+                          </li>
+                          <li class="detail_item">
+                            <div class="detail_item_label">
+                              <span class="label_icon"><i class="fas fa-plus"></i></span>
+                              <h6 class="label_text">Rating:</h6>
+                            </div>
+                            <div class="detail_item_content">
+                              <div class="rating">
+                                <ng-container *ngFor="let star of [5, 4, 3, 2, 1]">
+                                  <input
+                                    type="radio"
+                                    [id]="'star' + star"
+                                    name="rating"
+                                    [value]="star"
+                                    [checked]="Math.floor(mangaDetails.rating) === star"
+                                    disabled
+                                  />
+                                  <label
+                                    [for]="'star' + star"
+                                    [class.filled]="mangaDetails.rating >= star"
+                                    [class.half]="mangaDetails.rating >= star - 0.5 && mangaDetails.rating < star"
+                                  ></label>
+                                </ng-container>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+
+                        <div class="votes_wrap ">
+                          <em>MangaNato.com rate : <span id="manga-rating-2">{{ mangaDetails.rating }}</span>/ 5 - {{ mangaDetails.totalLikes }} votes</em>
+                        </div>
+
+                        <p class="mb-0">
+                          <img src="assets/images/bookmark.png" alt="bookmark" class="img-fluid bookmark_img">
+                        </p>
+
+                        <div class="d-flex gap-2">
+                          <a href="javascript:void(0)"
+                            class="btn btn-primary btn-sm d-flex gap-1 align-items-center text-white"><i
+                              class="fas fa-thumbs-up"></i> Likes <span id="manga-likes">{{ mangaDetails.totalLikes }}</span></a>
+                          <a href="javascript:void(0)"
+                            class="btn btn-primary btn-sm d-flex gap-1 align-items-center text-white">Share</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="detail_item_discription">
+                      <h6>Description :</h6>
+                      <div class="discription_content" id="manga-description">
+                        {{ mangaDetails.description }}
+                      </div>
+                    </div>
+                    <div class="detail_item_btn_wrapper">
+                      <a href="javascript:void(0)" class="item_read_more_btn">
+                        SHOW MORE <span class="ms-1"><i class="fas fa-arrow-down"></i></span>
+                      </a>
+                    </div>
+                  </div>
+                  <ng-container *ngIf="mangaDetails.chapters.length > 0">
+                    <div class="panel_chapter_list">
+                      <ul class="chapter_list_header">
+                        <li>
+                          <span class="chapter-name">Chapter name</span>
+                          <span class="chapter-view">View</span>
+                          <span class="chapter-time">Uploaded</span>
+                        </li>
+                      </ul>
+                      <ul class="chapter_list_body" id="chapter_list_container">
+                        <li *ngFor="let chapter of mangaDetails.chapters">
+                          <a [routerLink]="['/chapter', chapter.id,mangaIds]" class="chapter-name" [id]="chapter.id">
+                            Chapter {{ chapter.chapterNumber }}{{ chapter.title ? ' - ' + chapter.title : '' }}
+                          </a>
+                          <span class="chapter-view">{{ chapter.views }}</span>
+                          <span class="chapter-time">{{ chapter.uploadedTime }}</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </ng-container>
+                </div>
+              </ng-container>
+            </div>
+            <div class="col-md-4">
+              <app-sidebar></app-sidebar>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <app-footer></app-footer>
+  </div>

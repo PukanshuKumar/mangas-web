@@ -1,0 +1,332 @@
+<div class="box-loader" *ngIf="isLoading">
+  <div class="loader"></div>
+</div>
+
+<div class="d-flex flex-column h-m-100">
+  <app-header></app-header>
+  <main class="flex-fill ">
+    <app-top-week></app-top-week>
+
+    <section class="main_section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="filter_wrapper">
+              <div class="filter_header">
+                <h2 class="filter_title">FILTER (ADVANCED SEARCH)</h2>
+                <a href="javascript:void(0)" class="filter_btn stretched-link">
+                  <span class="icon"><i class="fas fa-plus"></i></span>
+                  <span class="filter_text">Show</span>
+                </a>
+              </div>
+              <div class="filter_body d-none" id="filter_body">
+                <h5>Genres:</h5>
+                <div class="genre_wrapper">
+                  <div class="genre_info_btn_wrapper">
+                    <a href="javscript:void(0)" class="add_genre genre_info_btn">
+                      <span class="icon"><i class="fas fa-plus-circle"></i></span>
+                      Include Genre
+                    </a>
+                    <a href="javscript:void(0)" class="remove_genre genre_info_btn">
+                      <span class="icon"><i class="fas fa-minus-circle"></i></span>
+                      Include Genre
+                    </a>
+                    <a href="javascript:void(0)" id="info_genre" class="info_genre genre_info_btn"
+                      onclick="HideGenresInfo()">
+                      <span class="icon"><i class="fas fa-question-circle"></i></span>
+                    </a>
+                  </div>
+                  <div class="genre_info d-none" id="genre_info">
+                    <h6>
+                      <span class="add_genre icon"><i class="fas fa-plus-circle"></i></span>
+                      <b>Include genre:</b> If you include Historical , it will filter only mangas with Historical
+                      genre. (You can include multiple genres).
+                    </h6>
+                    <h6>
+                      <span class="remove_genre icon"><i class="fas fa-minus-circle"></i></span>
+                      <b>Exclude genre:</b> If you include Comedy, Romance but exclude Ecchi, it will filter all
+                      mangas with Comedy and Romance but Ecchi.
+                    </h6>
+                  </div>
+                </div>
+                <ul class="genres_list_wrapper">
+                  <li class="list_item status_all" id="status_all">
+                    <a [routerLink]="['/list-view']" [queryParams]="{status: 'all' }">
+                      ALL
+                    </a>
+                  </li>
+                  <li class="list_item">
+                    <a href="javascript:void(0)">
+                      Action
+                    </a>
+                  </li>
+                  <li class="list_item inactive">
+                    <a href="javascript:void(0)">
+                      Doujinshi
+                    </a>
+                  </li>
+                  <li class="list_item">
+                    <a href="javascript:void(0)">
+                      Drama
+                    </a>
+                  </li>
+                  <li class="list_item">
+                    <a href="javascript:void(0)">
+                      Fantasy
+                    </a>
+                  </li>
+                  <li class="list_item">
+                    <a href="javascript:void(0)">
+                      Historical
+                    </a>
+                  </li>
+                  <li class="list_item">
+                    <a href="javascript:void(0)">
+                      Horror
+                    </a>
+                  </li>
+                  <li class="list_item">
+                    <a href="javascript:void(0)">
+                      Isekai
+                    </a>
+                  </li>
+                  <li class="list_item">
+                    <a href="javascript:void(0)">
+                      Manhua
+                    </a>
+                  </li>
+                  <li class="list_item">
+                    <a href="javascript:void(0)">
+                      Manhwa
+                    </a>
+                  </li>
+                  <li class="list_item">
+                    <a href="javascript:void(0)">
+                      Martial arts
+                    </a>
+                  </li>
+                  <li class="list_item">
+                    <a href="javascript:void(0)">
+                      Mecha
+                    </a>
+                  </li>
+                  <li class="list_item">
+                    <a href="javascript:void(0)">
+                      Medical
+                    </a>
+                  </li>
+                  <li class="list_item">
+                    <a href="javascript:void(0)">
+                      Mystery
+                    </a>
+                  </li>
+                  <li class="list_item">
+                    <a href="javascript:void(0)">
+                      Psychological
+                    </a>
+                  </li>
+                  <li class="list_item">
+                    <a href="javascript:void(0)">
+                      Romance
+                    </a>
+                  </li>
+                  <li class="list_item">
+                    <a href="javascript:void(0)">
+                      School life
+                    </a>
+                  </li>
+                  <li class="list_item">
+                    <a href="javascript:void(0)">
+                      Sci fi
+                    </a>
+                  </li>
+                </ul>
+
+                <div class="row mt-2">
+                  <div class="col-md-3">
+                    <div class="d-flex align-items-center gap-2">
+                      <label for="" class="form-label fw-bold text-nowrap small">Order By:</label>
+                      <select class="form-select">
+                        <option selected>Latest Updated</option>
+                        <option value="">Top View</option>
+                        <option value="">New Manga</option>
+                        <option value="">A - Z</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="d-flex align-items-center gap-2">
+                      <label for="" class="form-label fw-bold text-nowrap small">Status:</label>
+                      <select class="form-select">
+                        <option selected>Ongoing and Completed</option>
+                        <option value="">Ongoing</option>
+                        <option value="">Completed</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mt-2">
+                  <div class="col-md-3">
+                    <div class="d-flex align-items-center gap-2">
+                      <label for="" class="form-label fw-bold text-nowrap small">Keywords:</label>
+                      <select class="form-select">
+                        <option selected>Alternative Name</option>
+                        <option value="">Everything</option>
+                        <option value="">Author</option>
+                        <option value="">Name title</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-2">
+                  <div class="col-md-12">
+                    <input type="text" placeholder="Search Manga" class="form-control">
+                    <button class="search_btn">Search</button>
+                  </div>
+                </div>
+                <div class="row mt-2 mb-2">
+                  <div class="col-md-12">
+                    <label for="" class="form-label fw-bold text-nowrap small">URL to load my filter anywhere(only
+                      copy):</label>
+                    <input type="text" placeholder="Search Manga" class="form-control"
+                      value="https://manganato.com/advanced_search?s=all&page=1" readonly>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="list_view_container">
+              <div class="breadcrumb_wrapper">
+                <div class="breadcrumb_item">
+                  <a class="pe-1" [routerLink]="['/']">Read Manga Online</a>
+                </div>
+
+                <div class="breadcrumb_item">
+                  <a class="pe-1" href="javascript:void(0)"><span>Top View</span></a>
+                </div>
+                <div class="breadcrumb_item">
+                  <a href="javascript:void(0)">
+                    <span>Page <span id="currentPageNumber">{{ currentPage }}</span></span>
+                  </a>
+                </div>
+              </div>
+              <div class="list_view_body" id="list_view_items">
+                <ng-container *ngFor="let manga of filteredMangasList">
+                  <div class="list_view_item">
+                    <div class="item_img">
+                      <img [src]="manga.cover" class="img-fluid" [alt]="manga.title" referrerpolicy="no-referrer">
+                    <span [class]="'badge '+ manga.popularityTag+'_badge'">{{ manga.popularityTag }}</span>
+                    <span class="rating">
+                      <span class="content">{{ manga.rating }}</span>
+                      <span class="icon"><i class="fas fa-star"></i></span>
+                    </span>
+                    </div>
+                    <div class="item_content">
+                      <h2 class="item_title">
+                        <a [routerLink]="['/manga', manga.id]">{{ manga.title }}</a>
+                      </h2>
+                      <div class="item_chapter">
+                        <a [routerLink]="['/chapter', manga.chapterId,manga.id]" class="chapter_link">
+                          Chapter {{ manga.chapter }} <span *ngIf="manga.chapterTitle">: {{ manga.chapterTitle }}</span>
+                        </a>
+                      </div>
+                      <div class="item_info_wrapper">
+                        <div class="info_item item_views">
+                          <span class="icon me-1"><i class="fas fa-eye"></i> </span>
+                          <span>{{ manga.views }}</span>
+                        </div>
+                        <div class="info_item item_updated_date">
+                          <span class="icon me-1"><i class="fas fa-calendar"></i> </span>
+                          <span>{{ manga.lastUpdated }}</span>
+                        </div>
+                        <div class="info_item item_author">
+                          <span class="icon me-1"><i class="fas fa-user"></i> </span>
+                          <span>{{ manga.author }}</span>
+                        </div>
+                      </div>
+                      <div class="item_discription">
+                        {{ manga.description }}
+                      </div>
+                      <div class="item_btn_wrapper">
+                        <a href="javascript:void(0)" class="item_read_more_btn">Read More</a>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+              <div class="pagination_wrapper">
+                <div class="total-page page-item">TOTAL: {{ totalManga }}</div>
+                <div class="pages_wrapper">
+
+                  <div class="page-item active" [class.disabled]="currentPage === 1">
+                    <a href="javascript:void(0)" (click)="onPageChange(1)">FIRST (1)</a>
+                  </div>
+
+                  <div class="page-item" *ngFor="let page of pagesToShow" [class.active]="page === currentPage">
+                    <a href="javascript:void(0)" (click)="onPageChange(page)">{{ page }}</a>
+                  </div>
+
+                  <div class="page-item active" [class.disabled]="currentPage === totalPages">
+                    <a href="javascript:void(0)" (click)="onPageChange(totalPages)">LAST ({{ totalPages }})</a>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <section class="genres_section list_view">
+              <div class="section_content">
+                <ul class="genres_list" id="genres_list_container">
+                  <ng-container *ngFor="let genre of mangaGenresList">
+                    <li class="list_item " [id]="genre.id">
+                      <a [routerLink]="['/list-view']" [queryParams]="{genres: genre.id, genrenames: genre.name }">
+                        {{ genre.name }}
+                      </a>
+                    </li>
+                  </ng-container>
+                </ul>
+                <ul class="genres_list border-bottom">
+                  <li class="list_item sort_latest" id="sort_latest">
+                    <a [routerLink]="['/list-view']" [queryParams]="{category: 'latest' }">
+                      Latest
+                    </a>
+                  </li>
+                  <li class="list_item sort_newest" id="sort_newest">
+                    <a [routerLink]="['/list-view']" [queryParams]="{category: 'newest' }">
+                      Newest
+                    </a>
+                  </li>
+                  <li class="list_item sort_top-view" id="sort_top-view">
+                    <a [routerLink]="['/list-view']" [queryParams]="{category: 'top-view' }">
+                      Top View
+                    </a>
+                  </li>
+                </ul>
+                <ul class="genres_list border-bottom">
+                  <li class="list_item status_all" id="status_all">
+                    <a [routerLink]="['/list-view']" [queryParams]="{status: 'all' }">
+                      ALL
+                    </a>
+                  </li>
+                  <li class="list_item status_completed" id="status_completed">
+                    <a [routerLink]="['/list-view']" [queryParams]="{status: 'completed' }">
+                      Completed
+                    </a>
+                  </li>
+                  <li class="list_item status_ongoing" id="status_ongoing">
+                    <a [routerLink]="['/list-view']" [queryParams]="{status: 'ongoing' }">
+                      Ongoing
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <app-footer></app-footer>
+</div>

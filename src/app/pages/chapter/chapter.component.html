@@ -1,0 +1,75 @@
+<div class="d-flex flex-column h-m-100">
+  <app-header></app-header>
+  <main class="flex-fill ">
+
+    <section class="main_section">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-10">
+            <div class="headpost mt-3">
+              <h1 class="entry-title" itemprop="name">{{ mangaTitle }} {{ currentChapterInfo }}</h1>
+              <div class="allc">All chapters are in <a [routerLink]="['/manga', selectedMangaId]">{{ mangaTitle }}</a></div>
+            </div>
+            <div class="breadcrumb_wrapper text-center justify-content-center small rounded shadow">
+              <div class="breadcrumb_item">
+                <a class="pe-2" routerLink="/">Read Manga Online</a>
+              </div>
+              <div class="breadcrumb_item">
+                <a class="pe-2" [routerLink]="['/manga', selectedMangaId]">{{ mangaTitle }}</a>
+              </div>
+              <div class="breadcrumb_item">
+                <a href="javascript:void(0)" >{{ currentChapterInfo }}</a>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center">
+              <select class="form-select form-select-sm w-auto" [(ngModel)]="selectedChapterId"
+                (change)="onChapterSelect($event)">
+                <option *ngFor="let chapter of chapterList" [value]="chapter.id">
+                  Chapter {{ chapter.chapterNumber }}{{ chapter.title ? ' - ' + chapter.title : '' }}
+                </option>
+              </select>
+              <div class="d-flex gap-2">
+                <button role="button" class="btn btn-dark btn-sm rounded-pill px-3 " href="javascript:void(0)"
+                  (click)="goToPreviousChapter()" [disabled]="!canGoToPrevious()" rel="prev">
+                  <i class="fas fa-angle-left"></i> Prev
+                </button>
+                <button role="button" class="btn btn-dark btn-sm rounded-pill px-3 " href="javascript:void(0)"
+                  (click)="goToNextChapter()" [disabled]="!canGoToNext()" rel="next">
+                  Next <i class="fas fa-angle-right"></i>
+                </button>
+              </div>
+            </div>
+            <div class="my-3 text-center" id="imagesContainer">
+              <img *ngFor="let page of chapterData" [src]="page" class="chapter-page img-fluid"
+                referrerpolicy="no-referrer" alt="Manga Page" />
+                <a routerLink="/">
+                  <img src="assets/images/gohome.webp" class="img-fluid mt-1" alt="user">
+                </a>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <select class="form-select form-select-sm w-auto" [(ngModel)]="selectedChapterId"
+                (change)="onChapterSelect($event)">
+                <option *ngFor="let chapter of chapterList" [value]="chapter.id">
+                  Chapter {{ chapter.chapterNumber }}{{ chapter.title ? ' - ' + chapter.title : '' }}
+                </option>
+              </select>
+              <div class="d-flex gap-2">
+                <button role="button" class="btn btn-dark btn-sm rounded-pill px-3 " href="javascript:void(0)"
+                  (click)="goToPreviousChapter()" [disabled]="!canGoToPrevious()" rel="prev">
+                  <i class="fas fa-angle-left"></i> Prev
+                </button>
+                <button role="button" class="btn btn-dark btn-sm rounded-pill px-3 " href="javascript:void(0)"
+                  (click)="goToNextChapter()" [disabled]="!canGoToNext()" rel="next">
+                  Next <i class="fas fa-angle-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <app-footer></app-footer>
+</div>

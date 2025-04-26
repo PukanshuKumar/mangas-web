@@ -1,0 +1,60 @@
+<div class="d-flex flex-column h-m-100">
+  <app-header></app-header>
+  <main class="flex-fill ">
+    <app-top-week></app-top-week>
+
+    <section class="main_section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="listing_panel_wrapper">
+              <div class="listing_panel_header">
+                <h3 class="header_title">READ MANGA ONLINE - LATEST UPDATES</h3>
+              </div>
+              <div class="listing_panel_body" id="itemsWrapper">
+                <ng-container *ngFor="let manga of latestMangas">
+                  <div class="listing_panel_item">
+                    <div class="item_img">
+                      <img [src]="manga.cover" class="img-fluid" [alt]="manga.title" referrerpolicy="no-referrer">
+                      <span [class]="'badge '+ manga.popularityTag+'_badge'">{{ manga.popularityTag }}</span>
+                      <span class="rating">
+                        <span class="content">{{ manga.rating }}</span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                      </span>
+                    </div>
+                    <div class="item_content">
+                      <h2 class="item_title">
+                        <a [routerLink]="['/manga', manga.id]">{{ manga.title }}</a>
+                      </h2>
+                      <span class="item_author">{{ manga.author }}</span>
+                      <div class="item_chapter_wrapper">
+                        <ng-container *ngFor="let ch of manga.chapters">
+                          <div class="item_chapter">
+                            <a [routerLink]="['/chapter',  ch.id,manga.id]">Chapter {{ ch.chapter }} {{ ch.chapterTitle }}</a>
+                            <span class="item_updated_time">{{ formatTime(ch.updatedAt) }}</span>
+                          </div>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+              <div class="listing_panel_footer">
+                <a [routerLink]="['/list-view']" [queryParams]="{category: 'latest' }" id="loadMore" class="footer_link">
+                  << MORE>>
+                </a>
+                <!-- <a href="latest-manga" id="loadMore" class="footer_link">
+                    << MORE>>
+                  </a> -->
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <app-sidebar></app-sidebar>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <app-footer></app-footer>
+</div>

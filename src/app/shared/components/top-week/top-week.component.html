@@ -1,0 +1,59 @@
+<ng-container *ngIf="topWeeklyManga.length > 0">
+  <section class="hero_section mt-3">
+    <div class="container">
+      <div class="section_heading">
+        <div class="heading">
+          <span class="icon"><i class="fas fa-thumbs-up"></i></span>
+          <h1>Top Week</h1>
+        </div>
+      </div>
+      <div class="section_content">
+        <div class="slider_container">
+          <button class="controls prev" (click)="scrollSlider('prev')">❮</button>
+
+          <div class="slider_wrapper" #slider>
+            <div class="slider_item" *ngFor="let manga of topWeeklyManga">
+              <img [src]="manga.cover" [alt]="manga.title" class="slider_img" referrerpolicy="no-referrer">
+              <div class="slider_caption">
+                <h3 class="item_title">
+                  <a [routerLink]="['/manga', manga.id]" class="chapter_link">
+                    {{ manga.title }}
+                  </a>
+                </h3>
+                <p class="item_text">
+                  <a [routerLink]="['/chapter', manga.chapterId,manga.id]" class="chapter_link">
+                    Chapter {{ manga.chapter }}
+                    <span *ngIf="manga.chapterTitle">: {{ manga.chapterTitle }}</span>
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <button class="controls next" (click)="scrollSlider('next')">❯</button>
+        </div>
+
+
+        <!-- <div class="slider_container owl-carousel" id="hero-slider">
+          <ng-container *ngFor="let manga of topWeeklyManga">
+            <div class="slider_item ">
+              <img [src]="manga.cover" [alt]="manga.title" class="slider_img" referrerpolicy="no-referrer">
+              <div class="slider_caption">
+                <h3 class="item_title">
+                  <a [routerLink]="['/manga', manga.id]" class="chapter_link">
+                    {{ manga.title }}
+                  </a>
+                </h3>
+                <p class="item_text">
+                  <a [routerLink]="['/manga', manga.id]" class="chapter_link">
+                    Chapter {{ manga.chapter }} <span *ngIf="manga.chapterTitle">: {{ manga.chapterTitle }}</span>
+                  </a>
+                </p>
+              </div>
+            </div>
+          </ng-container>
+        </div> -->
+      </div>
+    </div>
+  </section>
+</ng-container>

@@ -1,0 +1,42 @@
+// .chapter-page {
+//     width: 100%;
+//     max-width: 800px;
+//     margin: 0 auto;
+//     border-radius: 8px;
+//     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+//   }
+
+
+.headpost {
+  overflow: hidden;
+  text-align: center;
+  padding: 0 10px;
+  margin: 0 auto;
+  margin-bottom: 15px;
+  max-width: 1142px
+}
+
+.headpost h1 {
+  margin: 0;
+  font-size: 21px;
+  color: #333;
+  font-weight: 700;
+}
+
+.allc a {
+  color: #333;
+  font-weight: 500
+}
+
+.headpost .allc {
+  font-size: 13px
+}
+
+.headpost .allc a {
+  color: #333;
+  text-decoration: none;
+}
+
+.headpost .allc a:hover {
+  color: inherit
+}

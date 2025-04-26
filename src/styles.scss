@@ -1,1 +1,58 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'assets/css/style.scss';
+
+
+.box-loader {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    transition: 0.3s color, 0.3s border, 0.3s transform, 0.3s opacity;
+    align-items: center;
+    justify-content: center;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 999;
+        background: #000000b3;
+    }
+}
+
+.loader {
+	border: 2em solid transparent;
+	border-top-color: #fff;
+	border-radius: 50%;
+	animation: 1s loader linear infinite;
+	position: relative;
+    z-index: 9999;
+
+	&:before {
+		content: '';
+		display: block;
+		width: inherit;
+		height: inherit;
+		position: absolute;
+		top: -2em;
+		left: -2em;
+		border: 2em solid #fff;
+		border-radius: 50%;
+		opacity: .5;
+	}
+}
+
+@keyframes loader {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
