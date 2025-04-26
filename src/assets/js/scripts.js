@@ -121,7 +121,7 @@ genre_filter_list.forEach(function (item) {
 
 
 async function genreManga() {
-    const BASE_URL = "http://localhost:5000";
+    const BASE_URL = "https://api.mangadex.org";
     const response = await fetch(`${BASE_URL}/genres`);
     const genreList = await response.json();
 
