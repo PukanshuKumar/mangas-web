@@ -50,7 +50,7 @@ export class MangaService {
     return this.http.get(url);
   }
 
-  getTopWeekly(offset = 0): Observable<any> {
+  getTopWeekly(offset: number = 0): Observable<any> {
     const now = new Date();
     now.setDate(now.getDate() - 7); // Subtract 7 days for weekly data
 
@@ -67,6 +67,7 @@ export class MangaService {
     const url = `${this.BASE_URL}/manga`;
     const params = new HttpParams()
       .set('limit', '10')
+      .set('offset', offset)
       .set('updatedAtSince', encodedDate)
       .set('order[latestUploadedChapter]', 'desc');
 
@@ -92,10 +93,11 @@ export class MangaService {
     return this.http.get(url, { params });
   }
 
-  getLatestMangas(offset = 0): Observable<any> {
+  getLatestMangas(offset: number = 0): Observable<any> {
     const url = `${this.BASE_URL}/manga`;
     const params = new HttpParams()
       .set('limit', '10')
+      .set('offset', offset)
       .set('order[latestUploadedChapter]', 'desc')
       .set('hasAvailableChapters', 'true');
 
@@ -117,7 +119,7 @@ export class MangaService {
   }
 
   // getMangaList( offset: number = 0, limit: number = 10, genres: string[] = [], status: string = 'all', category: 'latest' | 'newest' | 'top-view' = 'latest' ): Observable<any> {
-  getMangaList( offset: number = 0, limit: number = 10, genres: string[] = [], status: string, category: string ): Observable<any> {
+  getMangaList( offset: number = 0, limit: number = 10, genres: string[] = [], status: string, category: string,keyword: string = '' ): Observable<any> {
     let sortQuery = 'order[latestUploadedChapter]=desc';
     if (category === 'newest') {
       sortQuery = 'order[createdAt]=desc';
@@ -136,10 +138,14 @@ export class MangaService {
     if (status && status !== 'all') {
       query += `&status[]=${status}`;
     }
+      // Add keyword search
+  if (keyword && keyword.trim()) {
+    query += `&title=${encodeURIComponent(keyword.trim())}`;
+  }
 
     const fullUrl = `${this.BASE_URL}/manga?${query}`;
 
-    console.log(fullUrl); // to verify final URL
+    // console.log(fullUrl); // to verify final URL
     return this.http.get(fullUrl);
   }
 

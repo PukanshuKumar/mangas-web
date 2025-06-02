@@ -26,7 +26,10 @@
               <select class="form-select form-select-sm w-auto" [(ngModel)]="selectedChapterId"
                 (change)="onChapterSelect($event)">
                 <option *ngFor="let chapter of chapterList" [value]="chapter.id">
-                  Chapter {{ chapter.chapterNumber }}{{ chapter.title ? ' - ' + chapter.title : '' }}
+                  Chapter {{ chapter.chapterNumber }}
+                    <ng-container *ngIf="chapter.title && chapter.title !== 'Chapter ' + chapter.chapterNumber">
+                      - {{ chapter.title }}
+                    </ng-container>
                 </option>
               </select>
               <div class="d-flex gap-2">
@@ -52,7 +55,10 @@
               <select class="form-select form-select-sm w-auto" [(ngModel)]="selectedChapterId"
                 (change)="onChapterSelect($event)">
                 <option *ngFor="let chapter of chapterList" [value]="chapter.id">
-                  Chapter {{ chapter.chapterNumber }}{{ chapter.title ? ' - ' + chapter.title : '' }}
+                  Chapter {{ chapter.chapterNumber }}
+                    <ng-container *ngIf="chapter.title && chapter.title !== 'Chapter ' + chapter.chapterNumber">
+                      - {{ chapter.title }}
+                    </ng-container>
                 </option>
               </select>
               <div class="d-flex gap-2">

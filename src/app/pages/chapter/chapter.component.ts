@@ -117,10 +117,17 @@ export class ChapterComponent implements OnInit {
   get currentChapterInfo(): string {
     const chapter = this.chapterList.find(ch => ch.id === this.selectedChapterId);
     if (chapter) {
-      return `Chapter ${chapter.chapterNumber} - ${chapter.title}`;
+      let { chapterNumber, title } = chapter;
+      let chapterNumber2 =  'Chapter '+ chapterNumber;
+      if (title && title !== chapterNumber2) {
+        return `Chapter ${chapterNumber} - ${title}`;
+      } else {
+        return `Chapter ${chapterNumber}`;
+      }
     }
     return 'Unknown Chapter';
   }
+
 
 
   canGoToPrevious(): boolean {

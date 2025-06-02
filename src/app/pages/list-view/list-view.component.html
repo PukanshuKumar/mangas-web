@@ -14,12 +14,12 @@
               <div class="filter_wrapper">
                 <div class="filter_header">
                   <h2 class="filter_title">FILTER (ADVANCED SEARCH)</h2>
-                  <a href="javascript:void(0)" class="filter_btn stretched-link">
+                  <a href="javascript:void(0)" class="filter_btn stretched-link" (click)="toggleFilter()">
                     <span class="icon"><i class="fas fa-plus"></i></span>
                     <span class="filter_text">Show</span>
                   </a>
                 </div>
-                <div class="filter_body d-none" id="filter_body">
+                <div class="filter_body"  [ngClass]="{'d-none': !showFilter}" id="filter_body">
                   <h5>Genres:</h5>
                   <div class="genre_wrapper">
                     <div class="genre_info_btn_wrapper">
@@ -31,12 +31,11 @@
                         <span class="icon"><i class="fas fa-minus-circle"></i></span>
                         Include Genre
                       </a>
-                      <a href="javascript:void(0)" id="info_genre" class="info_genre genre_info_btn"
-                        onclick="HideGenresInfo()">
+                      <a href="javascript:void(0)" id="info_genre" class="info_genre genre_info_btn" (click)="toggleGenresFilter()">
                         <span class="icon"><i class="fas fa-question-circle"></i></span>
                       </a>
                     </div>
-                    <div class="genre_info d-none" id="genre_info">
+                    <div class="genre_info"  [ngClass]="{'d-none': !showGenresFilter}" id="genre_info">
                       <h6>
                         <span class="add_genre icon"><i class="fas fa-plus-circle"></i></span>
                         <b>Include genre:</b> If you include Historical , it will filter only mangas with Historical
@@ -55,144 +54,58 @@
                         ALL
                       </a>
                     </li>
-                    <li class="list_item">
-                      <a href="javascript:void(0)">
-                        Action
-                      </a>
-                    </li>
-                    <li class="list_item inactive">
-                      <a href="javascript:void(0)">
-                        Doujinshi
-                      </a>
-                    </li>
-                    <li class="list_item">
-                      <a href="javascript:void(0)">
-                        Drama
-                      </a>
-                    </li>
-                    <li class="list_item">
-                      <a href="javascript:void(0)">
-                        Fantasy
-                      </a>
-                    </li>
-                    <li class="list_item">
-                      <a href="javascript:void(0)">
-                        Historical
-                      </a>
-                    </li>
-                    <li class="list_item">
-                      <a href="javascript:void(0)">
-                        Horror
-                      </a>
-                    </li>
-                    <li class="list_item">
-                      <a href="javascript:void(0)">
-                        Isekai
-                      </a>
-                    </li>
-                    <li class="list_item">
-                      <a href="javascript:void(0)">
-                        Manhua
-                      </a>
-                    </li>
-                    <li class="list_item">
-                      <a href="javascript:void(0)">
-                        Manhwa
-                      </a>
-                    </li>
-                    <li class="list_item">
-                      <a href="javascript:void(0)">
-                        Martial arts
-                      </a>
-                    </li>
-                    <li class="list_item">
-                      <a href="javascript:void(0)">
-                        Mecha
-                      </a>
-                    </li>
-                    <li class="list_item">
-                      <a href="javascript:void(0)">
-                        Medical
-                      </a>
-                    </li>
-                    <li class="list_item">
-                      <a href="javascript:void(0)">
-                        Mystery
-                      </a>
-                    </li>
-                    <li class="list_item">
-                      <a href="javascript:void(0)">
-                        Psychological
-                      </a>
-                    </li>
-                    <li class="list_item">
-                      <a href="javascript:void(0)">
-                        Romance
-                      </a>
-                    </li>
-                    <li class="list_item">
-                      <a href="javascript:void(0)">
-                        School life
-                      </a>
-                    </li>
-                    <li class="list_item">
-                      <a href="javascript:void(0)">
-                        Sci fi
-                      </a>
+                    <li class="list_item" [id]="genre.id" *ngFor="let genre of mangaGenresList" [class.active]="isSelected(genre)" (click)="toggleGenre(genre)" >
+                      <input type="checkbox" [checked]="isSelected(genre)" hidden />
+                      <a href="javascript:void(0)">{{ genre.name }}</a>
                     </li>
                   </ul>
 
-                  <div class="row mt-2">
-                    <div class="col-md-3">
-                      <div class="d-flex align-items-center gap-2">
-                        <label for="" class="form-label fw-bold text-nowrap small">Order By:</label>
-                        <select class="form-select">
-                          <option selected>Latest Updated</option>
-                          <option value="">Top View</option>
-                          <option value="">New Manga</option>
-                          <option value="">A - Z</option>
-                        </select>
+                  <form [formGroup]="searchForm">
+                    <div class="row mt-2">
+                      <div class="col-md-3">
+                        <div class="d-flex align-items-center gap-2">
+                          <label for="" class="form-label fw-bold text-nowrap small">Order By:</label>
+                          <select class="form-select" formControlName="orderBy">
+                            <option value="" selected>Latest Updated</option>
+                            <option value="top-view">Top View</option>
+                            <option value="newest">New Manga</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="d-flex align-items-center gap-2">
+                          <label for="" class="form-label fw-bold text-nowrap small">Status:</label>
+                          <select class="form-select" formControlName="status">
+                            <option value="all" selected>Ongoing and Completed</option>
+                            <option value="ongoing">Ongoing</option>
+                            <option value="completed">Completed</option>
+                          </select>
+                        </div>
                       </div>
                     </div>
-                    <div class="col-md-3">
-                      <div class="d-flex align-items-center gap-2">
-                        <label for="" class="form-label fw-bold text-nowrap small">Status:</label>
-                        <select class="form-select">
-                          <option selected>Ongoing and Completed</option>
-                          <option value="">Ongoing</option>
-                          <option value="">Completed</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
 
-                  <div class="row mt-2">
-                    <div class="col-md-3">
-                      <div class="d-flex align-items-center gap-2">
-                        <label for="" class="form-label fw-bold text-nowrap small">Keywords:</label>
-                        <select class="form-select">
-                          <option selected>Alternative Name</option>
-                          <option value="">Everything</option>
-                          <option value="">Author</option>
-                          <option value="">Name title</option>
-                        </select>
+                    <!-- <div class="row mt-2">
+                      <div class="col-md-3">
+                        <div class="d-flex align-items-center gap-2">
+                          <label for="" class="form-label fw-bold text-nowrap small">Keywords:</label>
+                          <select class="form-select">
+                            <option selected>Alternative Name</option>
+                            <option value="">Everything</option>
+                            <option value="">Author</option>
+                            <option value="">Name title</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div> -->
+                    <div class="row mt-2">
+                      <div class="col-md-12">
+                        <div class="d-flex gap-2 align-items-center">
+                          <input type="text" placeholder="Search Manga" class="form-control" formControlName="keyword">
+                          <button class="search_btn mt-0 rounded" (click)="onSearch()">Search</button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="row mt-2">
-                    <div class="col-md-12">
-                      <input type="text" placeholder="Search Manga" class="form-control">
-                      <button class="search_btn">Search</button>
-                    </div>
-                  </div>
-                  <div class="row mt-2 mb-2">
-                    <div class="col-md-12">
-                      <label for="" class="form-label fw-bold text-nowrap small">URL to load my filter anywhere(only
-                        copy):</label>
-                      <input type="text" placeholder="Search Manga" class="form-control"
-                        value="https://manganato.com/advanced_search?s=all&page=1" readonly>
-                    </div>
-                  </div>
+                  </form>
                 </div>
               </div>
 

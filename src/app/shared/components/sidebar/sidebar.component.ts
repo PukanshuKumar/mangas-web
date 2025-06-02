@@ -33,7 +33,6 @@ export class SidebarComponent  implements OnInit {
       }));
 
       this.mangaGenresList = results;
-      console.log(this.mangaGenresList);
     });
   }
 
@@ -60,7 +59,6 @@ export class SidebarComponent  implements OnInit {
       }));
 
       this.topAllTimeManga = results;
-      console.log(this.topAllTimeManga);
     });
   }
 
