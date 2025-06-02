@@ -10,8 +10,7 @@
         <div class="top_nav">
           <div class="search-box">
             <label class="icon" for="txt-search"><i class="fas fa-search"></i></label>
-            <input type="text" class="form-control txt-search" id="txt-search"
-              placeholder="Search Manga(everything)" />
+            <input type="text" class="form-control txt-search" id="txt-search" placeholder="Search Manga(everything)" (keyup.enter)="onEnterSearch(searchTerm.value)" #searchTerm />
           </div>
           <div class="auth_user" *ngIf="isLoggedIn">
             <div class="user_box">
@@ -37,8 +36,8 @@
                   class="fas fa-sign-in-alt"></i></span></a>
           </div>
           <div class="theme_btn ms-auto">
-            <button type="button" class="btn light-btn"><i class="fas fa-sun"></i></button>
-            <button type="button" class="btn dark-btn d-none"><i class="fas fa-moon"></i></button>
+            <button type="button" class="btn light-btn"  *ngIf="!isDarkTheme" (click)="toggleTheme(true)"><i class="fas fa-sun"></i></button>
+            <button type="button" class="btn dark-btn"  *ngIf="isDarkTheme" (click)="toggleTheme(false)"><i class="fas fa-moon"></i></button>
           </div>
         </div>
         <div class="bottom_nav">

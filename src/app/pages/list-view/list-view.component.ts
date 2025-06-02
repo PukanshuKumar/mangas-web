@@ -183,6 +183,8 @@ export class ListViewComponent implements OnInit {
       }));
 
       this.filteredMangasList = results;
+      console.log('Filtered Mangas:', this.filteredMangasList);
+
       this.totalManga = res.total || 0;
       this.totalPages = Math.ceil(this.totalManga / this.itemsPerPage);
       this.updatePagesArray();
@@ -234,6 +236,6 @@ export class ListViewComponent implements OnInit {
     const selectedGenreIds: string[] = this.selectedGenres.map((genre: any) =>
       typeof genre === 'object' && genre.id ? genre.id : genre
     );
-    this.loadFilteredMangas( this.currentPage, offset, selectedGenreIds, status, orderBy,keyword );
+    this.loadFilteredMangas( this.offset, this.limit, selectedGenreIds, status, orderBy,keyword );
   }
 }

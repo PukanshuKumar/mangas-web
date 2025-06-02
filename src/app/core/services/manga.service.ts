@@ -145,7 +145,7 @@ export class MangaService {
 
     const fullUrl = `${this.BASE_URL}/manga?${query}`;
 
-    // console.log(fullUrl); // to verify final URL
+    console.log(fullUrl); // to verify final URL
     return this.http.get(fullUrl);
   }
 
